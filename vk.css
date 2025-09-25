@@ -1,0 +1,496 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* div {
+  width: 200px;
+  padding: 20px;
+  border: 5px solid black;
+}*/
+  /*example for content box:by default in css
+padding will be added seperately border added seperately
+apart from this 200px width*/
+  /*200+20+20+5+5(only left and right in width)*/
+  /*200+20+20+5+50(only top and bottom in height)*/
+  /*in border box :(prefered)width is 200px including padding and border*/
+  /*200-20-20-5-5(lly left and right for width and top and bottom for height*/
+  /* Top and bottom padding affect height, not width.
+ Left and right padding affect width, not height.*/
+}
+
+.container {
+  display: inline-block;
+}
+
+body {
+  height: 150vh;
+  background-image: url("gallery/main.jpg");
+  /*postion:relative;
+if i gave here the entire body will become relative and
+i gave text as absolute ..if i give top and bottom values
+or left and right values ..the text will move all over the body*/
+  /*dont forget---To make absolute positioning work inside a container, 
+the container must be set to:posotion relative*/
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: auto;
+}
+
+nav {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  width: 100%;
+  display: flex;
+  /*justify-content: space-between;*/
+  align-items: center;
+}
+
+.logo img {
+  height: auto;
+  width: 200px;
+
+  margin-right: 500px;
+}
+
+nav ul {
+  display: flex;
+  margin-left: 100px;
+
+  /* padding: 8px 12px;
+  margin-right: 50px;*/
+}
+
+nav li {
+  display: inline-block;
+
+  margin: 0.8px;
+  gap: 10px;
+  font-size: 1.02 rem;
+  color: white;
+
+  /*width: 100%;*/
+  max-width: 70%;
+}
+
+nav a {
+  margin: 20px;
+  color: white;
+  font-size: 1.05rem;
+  padding: 2px;
+  text-decoration: none;
+
+  /*width: 100%;*/
+  /*max-width: 100%;*/
+}
+
+nav a:hover {
+  color: blanchedalmond;
+  font-weight: bold;
+}
+
+#contactMessage {
+  margin-top: 10px;
+  background-color: bisque;
+  color: black;
+  font-size: 1.2rem;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+}
+.text {
+  color: antiquewhite;
+  text-align: center;
+  position: relative;
+  /*this is parent container for the text and if we give top and bottom
+  in absolute this will move inside only this div block*/
+  top: 2px;
+  bottom: 22px;
+}
+
+.text h1 {
+  position: absolute;
+  top: 150px;
+}
+span {
+  font-family: Montserrat;
+}
+.line1 {
+  margin-right: 65px;
+}
+
+.line2 {
+  margin-left: 20px;
+}
+
+.line3 {
+  margin-left: 70px;
+}
+
+/*#button {
+  display: flex;
+  margin-top: 0;
+}*/
+
+button {
+  color: black;
+  border: 2px solid green;
+  display: inline-block;
+  margin-top: 320px;
+  margin-left: 20px;
+  padding: 0.5rem;
+  width: auto;
+  background-color: yellow;
+}
+
+button:hover {
+  cursor: pointer;
+}
+.menu-line {
+  height: 3px;
+  width: 20px;
+  background-color: red;
+  margin-bottom: 3px;
+}
+
+.menu {
+  cursor: pointer;
+  display: none;
+}
+
+.showmenu {
+  display: flex;
+}
+
+#cartitem {
+  color: aliceblue;
+  font-size: 1.5rem;
+}
+/*----------------------------------------------------------*/
+
+@media all and (min-width: 1160px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 50 50px;
+    max-width: 2500px; /* Controls the width */
+    /* Center the nav */
+  }
+  nav.logo {
+    flex: 1;
+    /* Logo stays to the left */
+  }
+
+  nav ul {
+    display: flex;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  nav a {
+    font-size: 1.7rem;
+  }
+
+  .text {
+    color: antiquewhite;
+    text-align: center;
+    position: relative;
+    /*this is parent container for the text and if we give top and bottom
+  in absolute this will move inside only this div block*/
+    top: 20px;
+    bottom: 22px;
+    font-size: 2rem;
+  }
+
+  button {
+    color: black;
+    border: 2px solid green;
+    display: inline-block;
+    margin-top: 400px;
+    margin-left: 20px;
+    padding: 0.3rem;
+    width: auto;
+    background-color: yellow;
+    font-size: 1.5rem;
+  }
+}
+/*------------------dont touch this-----------------------------------------*/
+@media all and (min-width: 2420px) {
+  body {
+    height: 150vh;
+    background-image: url("gallery/main2.avif");
+    background-repeat: repeat;
+    background-size: cover;
+    width: auto;
+  }
+
+  button {
+    padding: 2rem;
+    margin-top: 800px;
+    font-size: 2rem;
+  }
+}
+/*-----------------------------------------------------------------*/
+@media all and (max-width: 1200px) {
+  body {
+    height: 150vh;
+    background-image: url("gallery/main2.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: auto;
+  }
+  nav {
+    display: flex;
+  }
+
+  .logo {
+    flex: 1;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /*gap should be given here only entire ul block*/
+    flex: 1;
+  }
+}
+/*--------------------------------------------------------*/
+
+@media all and (max-width: 1170px) {
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  ul a {
+    font-size: 1.5rem;
+  }
+}
+
+/*----------------------------------------------------------*/
+
+@media (min-width: 300px) and (max-width: 750px) {
+  body {
+    height: 200vh;
+    background-image: url("gallery/m3.jpg");
+    background-repeat: no-repeat;
+    background-size: stretch;
+    width: auto;
+  }
+  nav ul {
+    display: none;
+    position: relative;
+    z-index: 2;
+  }
+  .logo img {
+    width: 125px;
+    height: auto;
+    margin: 0px;
+  }
+  .menu {
+    display: block;
+    position: absolute;
+    left: 200px;
+    z-index: 1;
+  }
+
+  .showmenu {
+    display: block;
+    gap: 10px;
+    background-color: black;
+  }
+
+  ul a {
+    color: white;
+  }
+
+  #contactMessage {
+    margin-top: 10px;
+    background-color: bisque;
+    color: black;
+    font-size: 0.8rem;
+  }
+}
+@media (min-width: 751px) and (max-width: 1050px) {
+  nav {
+    display: flex;
+    max-width: 1500px;
+  }
+
+  nav ul {
+    margin: 0px;
+    display: none;
+    position: relative;
+    z-index: 2;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    left: 700px;
+    z-index: 1;
+  }
+
+  .menu-line {
+    padding: 3.5px;
+  }
+  .showmenu {
+    display: block;
+    gap: 10px;
+    top: 100px;
+    right: 100px;
+    background-color: black;
+  }
+
+  .text {
+    color: antiquewhite;
+    text-align: center;
+
+    /*this is parent container for the text and if we give top and bottom
+  in absolute this will move inside only this div block*/
+    top: 20px;
+    bottom: 22px;
+    font-size: 2rem;
+    /*rem ---relative to the root element <html>{font-size=16px}p{font-size:2rem
+    which is equal to 32px*/
+    /*em===element relative to the fontsize of the current element
+    or its parent html{16px} div{2em=16*2} div p{1.5em=now(32*1.5*/
+  }
+
+  button {
+    font-size: 2.5rem;
+  }
+  #button {
+    margin-top: 300px;
+  }
+
+  #loginlink i {
+    display: none;
+  }
+}
+
+@media (min-width: 250px) and (max-width: 460px) {
+  .menu {
+    display: block;
+    position: absolute;
+    left: 300px;
+  }
+  .menu-line {
+    border: 5px solid red;
+    width: 40px;
+  }
+
+  .showmenu {
+    background-color: black;
+    gap: 50px;
+  }
+
+  .text {
+    color: rgb(26, 24, 27);
+    text-align: center;
+
+    /*this is parent container for the text and if we give top and bottom
+  in absolute this will move inside only this div block*/
+
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 2rem;
+  }
+
+  #button {
+    margin-top: 100px;
+  }
+
+  #loginlink i {
+    display: none;
+  }
+
+  #loginoptions a {
+    font-size: 20px;
+  }
+}
+
+/*----------------------------------------
+@media all and (max-width: 640px) {
+  body {
+    height: 150vh;
+    background-image: url("gallery/ph1.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    width: auto;
+  }
+
+  .logo {
+    align-self: flex-start;
+    margin-right: 10px;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 25px;
+  }
+
+  .showmenu {
+    display: block;
+  }
+}
+/*--------------------------------
+@media all and (max-width: 430px) {
+  body {
+    height: 150vh;
+    background-image: url("gallery/ph1.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    width: auto;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  nav li {
+    display: block;
+    padding: 10px 0;
+  }
+  ul {
+    text-align: center;
+    padding: 0;
+  }
+
+  /*ul a {
+    display: none;
+  }
+
+  .logo {
+    align-self: flex-start;
+    margin-right: 10px;
+  }
+
+  .menu {
+    display: block;
+    position: absolute;
+    top: 0.5px;
+    right: 0.2px;
+  }
+
+  .showmenu {
+    display: block;
+  }
+}*/

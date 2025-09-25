@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+  </head>
+  <body>
+    <a href="index.html" id="homelink" >Back To Home</a>
+    <h3>VK Masalas</h3>
+    <div id="box">
+      
+      <form action="" id="form">
+        <h4> New User</h4>
+        <div class="forminput">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" />
+        </div>
+        <div class="forminput">
+          <label for="email">User Email-id </label>
+          <input type="email" id="email" name="email" />
+        </div>
+        <div class="forminput">
+          <label for="password">Enter Password</lable>
+          <input type="password" id="password" name="password" required/>
+        </div>
+        <div class="forminput">
+            <label for="cpwd">Confirm Password</label>
+            <input type="password" id="cpwd" name="cpwd" required>
+        </div>
+        <button type="submit" >Register </button>
+    </div>
+    
+
+       
+      </form>
+      <div class="message"></div>
+
+      
+        <a href="signin.html"><h4> Already have Login..Click Here</h4></a>
+        <!-- <input type="text" id="susername" placeholder="Username" required>
+    <input type="password" id="spassword" placeholder="Password" required>
+        <button type="submit" onclick="window.location.href='signin.html'"> SignIn</button> -->
+    
+
+      
+
+      <script>
+        const form = document.querySelector('#form')
+
+const uname=document.getElementById('username');
+console.log(uname.value);
+const email=document.getElementById('email');
+const pass=document.getElementById('password');
+const cpass=document.getElementById('cpwd');
+const popup=document.querySelector('.message');
+//in form dont use onclick for submit button
+//event listner for form
+  form.addEventListener('submit', function(e){
+
+//It's like saying: "Hold on, browser 
+// — I'll handle this myself. Don't do your usual thing."
+//It tells the browser “Don’t do the default action for this event.”
+//in the case of a form submission, the default behavior is to:
+//1.Send the form data to the server 2.Reload the page
+  e.preventDefault();
+  //we have to use uname.value...get value is important
+  //trim--if not icluded ..white space means only space also consider as input
+  //which will accept as input 
+  //if any one field is empty we need to show the message ..for that ||
+
+if(!uname.value.trim() ||!email.value.trim() ||!pass.value.trim() ||!cpass.value.trim())
+{
+   popup.innerHTML="**All Fields are Mandatory**"
+     popup.style.color='Red';
+  popup.style.fontSize='32px';
+}
+
+else if(pass.value!==cpass.value)
+{
+   popup.innerText=`Password Not Matching`;
+}
+else
+{
+  popup.innerText="New User Registration Successfull"
+  popup.style.color='green';
+  popup.style.fontSize='32px';
+}
+
+//local storage...Session storage--not for large data
+//alternate backend ...but for small function
+//we can use like this 
+//session storage--once the session closed it will be deleted
+ let users = JSON.parse(localStorage.getItem('users')) || [];
+ //let users=[];
+ //window.onload=()=>{users=JSON.parse(localStorage.getItem(users)) || []}
+ //why we are using parse means ..we need to store as string in localstorage,
+ //but in js we need to reterive as array ..thats the rule ..
+ //this can be acheived using parse and stringfy
+ //2.while checking if the localstorage is empty it will return null value
+ //which should not happen ..so we add an empty to the users..if there is no data in the storage.
+
+   const exists = users.find(user => user.username === uname.value || user.email === email.value);
+   //.find() is a built-in JavaScript method used with arrays.
+//It searches through the array 
+//and returns the first element(means --first match) that matches a condition.
+// It does not continue checking the rest of the array.
+    if (exists) {
+      popup.innerText = "User already registered!";
+      popup.style.color = 'red';
+      return; // just exits the function — doesn't return a value
+    }
+    
+    // Store new user.push---insert in end ..not in the begning
+    //if we want to insert in the begning:use unshift(example --registration system)
+    users.push({
+      username: uname.value,
+      email: email.value,
+      password: pass.value
+    });
+    localStorage.setItem('users', JSON.stringify(users));
+    //its mandatory to store the item as string in storage
+
+    popup.innerText = "Registration Successful!";
+    popup.style.color = 'green';
+    popup.style.fontSize = '20px';
+
+    // Optional: Clear form
+    form.reset();
+    // No, .reset() is not a keyword in JavaScript.
+ //It's a built-in method (function) available on HTML forms.
+ //.reset() is used to clear all input fields in a form — it brings them back to their default values.
+  });
+
+  //window.location.href='index.html'
+
+
+
+      </script>
+   
+  </body>
+</html>

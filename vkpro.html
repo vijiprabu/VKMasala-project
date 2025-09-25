@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link rel="stylesheet" href="vkpro.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="containers">
+      <a class="btn btn-left"><i class="fa-solid fa-arrow-left"></i></a>
+      <a class="btn btn-right"><i class="fa-solid fa-arrow-right"></i></a>
+
+      <div id="image-title" class="imagetitle"></div>
+      <div id="price"></div>
+      <div class="mybutton">
+        <button type="submit" onclick="itemcart(event)">AddToCart</button>
+      </div>
+      <button type="button" onclick="window.location.href='index.html'">
+        <i class="fa-solid fa-house"></i>
+      </button>
+
+      <!-- <div>
+        <button type="button" onclick="window.location.href='index.html'">
+          <i class="fa-solid fa-house"></i>
+        </button>
+      </div> -->
+      <div class="popup"></div>
+      <div id="cart"></div>
+    </div>
+
+    <!-- <img
+        src="Project/gallery/chilli.avif"
+        alt="Product Image"
+        class="zoomable"
+      />
+
+      <img
+        src="gallery/coriander.avif "
+        alt="product Image"
+        class="zoomable"
+      />
+      <img src="gallery/garammasala.jpg" -->
+
+    <!-- <script>
+      const img = document.createElement("img");
+      img.src = "gallery/turmeric.jpg";
+      img.alt = "Product Image";
+      img.className = "zoomable"; //creating class for image <img class=zoomable>
+      //create product details
+      const details = document.createElement("div");
+      details.className = "product-details";
+      details.innerHTML = `<h2>Turmeric Powder(100gms)</h2>
+      <p><strong>Price:</strong>₹100</p>
+      `;
+      const Myimage = document.getElementById("container");
+      Myimage.appendChild(img);
+      Myimage.appendChild(details);
+      img.addEventListener("click", function () {
+        img.classList.toggle("zoomed");
+      });
+    </script> -->
+    <!--   <div id="container">
+    <img src="images/sample.jpg" alt="Product Image" class="zoomable" />
+    
+    <div class="product-details">
+      <h2>Red Sneakers</h2>
+      <p><strong>Price:</strong> ₹1999</p>
+      <p>Comfortable, stylish, and durable sneakers for everyday use.</p>
+    </div> -->
+
+    <script>
+      const container = document.getElementById("containers");
+      const buttons = document.querySelectorAll(".btn");
+      const message = document.querySelector(".popup");
+      const name = document.getElementById("image-title");
+      const add = document.getElementById("cart");
+      const rupee = document.getElementById("price");
+
+      console.log(buttons);
+      const images = [
+        {
+          name: "turmeric",
+          title: "Turmeric Powder",
+          price: "Rs100/100gms",
+          details:
+            "Bright yellow spice known for its anti-inflammatory properties.",
+        },
+        {
+          name: "chilli",
+          title: "Red Chilli Powder",
+          price: "Rs80/100gms",
+          details: "Hot and spicy. Made from dried red chilies.",
+        },
+        {
+          name: "Coriander",
+          title: "Dhaniya Powder",
+          price: "Rs90/100gms",
+          details: "Ground from dried coriader seeds,Mild,lemony flavour",
+        },
+        {
+          name: "garammasala",
+          title: "Grammasala Powder",
+          price: "Rs100/100gms",
+          details: "Warm blend: cinnamon, cloves, and cardamom.",
+        },
+        {
+          name: "pepper",
+          title: "Black Pepper",
+          price: "Rs100/100gms",
+          details: "Sharp, spicy taste. Enhances metabolism.",
+        },
+      ];
+      let index = 0;
+      container.style.background = `url("gallery/${images[0].name}.jpg") center/cover no-repeat`;
+      name.innerText = images[0].title;
+      rupee.innerText = images[0].price; //setting name for first image
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.stopPropagation(); // avoid triggering container click
+          //console.log("clicked");
+          if (button.classList.contains("btn btn-left")) {
+            index--;
+            if (index < 0) {
+              index = images.length - 1;
+            }
+            container.style.background = ` url("gallery/${images[index].name}.jpg") center/cover fixed no-repeat`;
+
+            //console.log("clicked left");
+          } else {
+            index++;
+            if (index == images.length) {
+              index = 0;
+            }
+            container.style.background = ` url("gallery/${images[index].name}.jpg") center/cover fixed no-repeat`;
+
+            //console.log(images[index].title);
+            //console.log("clicked right");
+          }
+          name.innerText = images[index].title;
+          rupee.innerText = images[index].price; //name for other images
+        });
+      });
+
+      container.addEventListener("click", () =>
+        //e to capture the events ..mouse clicks ..event return value
+        {
+          const { title, details } = images[index];
+          message.innerHTML = `${title}<br>${details}`;
+          message.style.display = "block"; //only clicking will dispaly .. in css property should be none
+          //console.log(` ${title}<br>${details}`);
+          /*setTimeout(() => {
+            message.innerHTML = "";//when we give like this only the content will disappear box will remain the same
+          }, 3000);*/
+          setTimeout(() => {
+            message.style.display = "none";
+          }, 3000);
+        }
+      );
+      //const spices = JSON.parse(localStorage.getItem("spices")) || [];
+
+      function itemcart(event) {
+        event.stopPropagation();
+
+        const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+        //loggedInuser---loginusername saved in this
+        //without parsing it was in json format ..only after am able to use the user.username field
+
+        if (!user || !user.username) {
+          //it returns
+          //null--true
+          //nonempty string "viji"--false
+          alert("Please log in to add items to cart.");
+          window.location.href = "login.html";
+          return;
+        } else {
+          alert(`Item ${images[index].name} added to cart by ${user.username}`);
+          const allCarts = JSON.parse(localStorage.getItem("allCarts")) || {};
+          const userCart = allCarts[user.username] || [];
+
+          userCart.push({
+            name: images[index].name,
+            price: images[index].price,
+          });
+
+          allCarts[user.username] = userCart;
+          localStorage.setItem("allCarts", JSON.stringify(allCarts));
+
+          //how image[index] works here..Because am  updating index later when buttons are clicked (right and left button..event triggered).
+        }
+      }
+      //add.innerText = `Item Added to Cart,Happy Shopping`;
+      //add.style.display = "block";
+      //add.style.color = "orange";
+      //add.style.fontFamily = "san-serif";
+      //add.style.margin = "15px";
+      //add.style.fontSize = "28px";
+      //setTimeout(() => {
+      //add.style.display = "none";
+      // }, 2000);
+    </script>
+  </body>
+</html>
+<!-- ----------------loading image from js(responsive) -->
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const image = document.getElementById("sliderImage");
+
+    if (window.innerWidth <= 768) {
+      image.src = "mobile-image.jpg"; // path to your mobile image
+    }
+  });
+</script> -->
